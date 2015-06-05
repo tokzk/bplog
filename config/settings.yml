@@ -1,0 +1,16 @@
+# Provider Page
+twitter_page:  "https://twitter.com/"
+facebook_page: "https://www.facebook.com/"
+github_page:   "https://github.com/"
+
+# アプリケーション名
+app_name: "bplog"
+
+# プログラマTwitterID
+programmer_twitter_id: "tokzk"
+
+# デザイナーTwitterID
+designer_twitter_id: ""
+
+# 曜日
+weekday: ["日", "月", "火", "水", "木", "金", "土"]
