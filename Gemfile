@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
+gem 'font-awesome-sass'
 
 # Model
 gem 'minimum-omniauth-scaffold'
