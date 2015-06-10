@@ -7,21 +7,24 @@
           = submit_tag "Search", name: nil
           
     .row
-      %table.table.table-striped.table-condensed
-        %tr
-          %th Title
-          %th Author
-          %th Manufacturer
-          %th ProductGroup
-          %th ASIN
-          %th SmallImage
-        - @items.each do |item|
+      - if @items.size > 0
+        %table.table.table-striped.table-condensed
           %tr
-            %td= item.title
-            %td= item.author
-            %td= item.manufacturer
-            %td= item.product_group
-            %td= item.asin
-            %td= image_tag item.image_url
+            %th Title
+            %th Author
+            %th Manufacturer
+            %th ProductGroup
+            %th ASIN
+            %th SmallImage
+          - @items.each do |item|
+            %tr
+              %td= link_to item.title, item.url, target: :_blank
+              %td= item.author
+              %td= item.manufacturer
+              %td= item.product_group
+              %td= item.asin
+              %td= image_tag item.image_url
 
-      = paginate @items
+        = paginate @items
+      - else
+        検索結果が見つかりません
