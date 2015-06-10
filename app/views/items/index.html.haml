@@ -1,0 +1,61 @@
+.section.item_search
+  .container
+    .row
+      .col-md-12
+        = form_tag items_path, method: :get do
+          = text_field_tag :search, params[:search]
+          = submit_tag "Search", name: nil
+          
+          %table
+            %tr
+              %th res
+              %td= @res
+            %tr
+              %th res.is_valid_request?
+              %td= @res.is_valid_request?
+            %tr
+              %th res.has_error?
+              %td= @res.has_error?
+            %tr
+              %th res.error
+              %td= @res.error
+            %tr
+              %th res.total_pages
+              %td= @res.total_pages
+            %tr
+              %th res.total_results
+              %td= @res.total_results
+            %tr
+              %th res.item_page
+              %td= @res.item_page
+
+    .row
+      %table.table.table-striped.table-condensed
+        %tr
+          %th Title
+          %th Author
+          %th Manufacturer
+          %th ProductGroup
+          %th ASIN
+          %th SmallImage
+        - @res.items.each_with_index do |item, n|
+          %tr
+            - item_attributes = item.get_element('ItemAttributes')
+            %td= item_attributes.get('Title')
+            %td= item_attributes.get('Author')
+            %td= item_attributes.get('Manufacturer')
+            %td= item_attributes.get('ProductGroup')
+            %td= @imgs.items[n].get('ASIN')
+            %td= image_tag @imgs.items[n].get('SmallImage/URL')
+
+      %nav
+        %ul.pagination
+          %li
+            %a{href: "#", "aria-label" => "Previous"}
+              %span{"aria-hidden" => "true"} &laquo;
+          - @res.total_pages.times do |page|
+            %li{class: "#{((page + 1) != @res.item_page) ? '' : 'active'}"}
+              = link_to  (page + 1), items_path(search: params[:search], page: (page + 1))
+          %li
+            %a{href: "#", "aria-label" => "Next"}
+              %span{"aria-hidden" => "true"} &raquo;

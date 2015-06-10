@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/auth/failure"            => "sessions#failure"
   get "/logout"                  => "sessions#destroy", as: :logout
 
+  resources :items, only: :index
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -20,6 +20,7 @@ gem 'simple_form'
 # Model
 gem 'minimum-omniauth-scaffold'
 gem 'amazon-ecs'
+gem 'active_attr'
 
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
