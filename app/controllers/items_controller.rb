@@ -4,15 +4,8 @@ class ItemsController < ApplicationController
   def index
     search_term = params[:search] || 'harry potter'
     item_page = params[:page] || '1'
-    @res  = Amazon::Ecs.item_search(search_term, { search_index: 'Books',
-                                                   item_page: item_page,
-                                                   sort: 'salesrank',
-                                                   country: 'jp'})
-    @imgs = Amazon::Ecs.item_search(search_term, { response_group: 'Images',
-                                                   search_index: 'Books',
-                                                   item_page: item_page,
-                                                   sort: 'salesrank',
-                                                   country: 'jp' })
-                                                               
+    
+    items, total_count = Item.search(search_term, item_page)
+    @items = Kaminari.paginate_array(items, total_count: total_count).page(params[:page]).per(10)
   end
 end
