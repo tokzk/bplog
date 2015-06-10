@@ -23,6 +23,8 @@ gem 'minimum-omniauth-scaffold'
 gem 'amazon-ecs'
 gem 'active_attr'
 
+gem 'retriable'
+
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'
 # gem 'capistrano-rails', group: :development

@@ -14,42 +14,24 @@ class Item
   attribute :large_image_url
 
   def self.find(asin)
-    retry_count = 0
-    begin
+    Retriable.retriable on: Timeout::Error, tries: 5, base_interval: 1 do
       res = Amazon::Ecs.item_lookup(asin, { response_group: "Medium",
                                             country: 'jp' })
       item = build(res.first_item)
-    rescue => e
-      retry_count += 1
-      logger.error e.message
-      if retry_count < 5
-        sleep(2)
-        retry
-      end
     end
   end
   
   def self.search(search_term, page = 1)
     return [[], 0] if search_term.blank?
-
-    retry_count = 0
-    begin
+    Retriable.retriable tries: 2, base_interval: 0.5 do
       res  = Amazon::Ecs.item_search(search_term, { response_group: 'Medium',
                                                     search_index: 'Books',
                                                     item_page: page,
                                                     sort: 'salesrank',
                                                     country: 'jp'})
-    rescue => e
-      retry_count += 1
-      logger.error e.message
-      if retry_count < 5
-        sleep(2)
-        retry
-      end
+      items = res.items.map{ |item| build(item) }
+      [items, total_count(res)]
     end
-
-    items = res.items.map{ |item| build(item) }
-    [items, total_count(res)]
   end
 
   def self.build(item)
