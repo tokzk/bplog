@@ -1,0 +1,10 @@
+= simple_form_for(@post) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :user, as: :hidden
+    = f.input :asin, as: :hidden
+    = f.input :content, label: false, input_html: { rows: 15 }
+
+  .form-actions
+    = f.button :submit, '投稿する'

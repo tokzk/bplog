@@ -1,0 +1,7 @@
+.section.new_post
+  .container
+    .row
+      .col-md-12
+        %h2 #{icon('pencil')} この本について書く
+        = render 'item', item:  @post.item
+        = render 'form'

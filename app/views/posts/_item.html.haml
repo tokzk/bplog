@@ -1,0 +1,11 @@
+.row.well
+  .col-md-2
+    = image_tag item.image_url, class: 'img-responsive img-thumbnail'
+  .col-md-10.section-box
+    %h4
+      = link_to item.title, item.url, target: :_blank
+      %small= "[#{item.product_group}]"
+    = item.author
+    /
+    = item.manufacturer
+    

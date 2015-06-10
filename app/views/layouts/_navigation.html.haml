@@ -2,13 +2,24 @@
 %nav.navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
-      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
         %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'Home', root_path, class: 'navbar-brand'
+      = link_to 'bplog', root_path, class: 'navbar-brand'
+
     .collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         = render 'layouts/navigation_links'
+
+      = form_tag items_path, method: :get, class: "navbar-form navbar-right",
+        role: "search" do
+
+        .input-group
+          = text_field_tag :search, params[:search], class: "form-control", placeholder: '探す...'
+          .input-group-btn
+            = button_tag type: :submit, class: "btn btn-default" do
+              %i.glyphicon.glyphicon-search
+
 
