@@ -18,6 +18,7 @@ gem 'font-awesome-sass'
 
 # Model
 gem 'minimum-omniauth-scaffold'
+gem 'amazon-ecs'
 
 # gem 'bcrypt', '~> 3.1.7'
 # gem 'unicorn'

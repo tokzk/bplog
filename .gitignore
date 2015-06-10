@@ -17,7 +17,8 @@
 vendor/bundle
 /log/*.log.*
 
-# rails_config
+# local settings
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+/.envrc
