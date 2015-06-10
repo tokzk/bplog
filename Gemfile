@@ -15,6 +15,7 @@ gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
 gem 'font-awesome-sass'
+gem 'simple_form'
 
 # Model
 gem 'minimum-omniauth-scaffold'
