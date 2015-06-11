@@ -18,10 +18,6 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'kaminari'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery-smooth-scroll'
-end
-
 # Model
 gem 'minimum-omniauth-scaffold'
 gem 'amazon-ecs'
