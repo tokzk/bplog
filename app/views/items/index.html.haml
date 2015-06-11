@@ -5,20 +5,19 @@
         %table.table.table-striped.table-condensed
           %tr
             %th Title
-            %th Author
             %th Manufacturer
-            %th ProductGroup
-            %th ASIN
-            %th SmallImage
           - @items.each do |item|
             %tr
-              %td= link_to item.title, new_post_url(asin: item.asin)
-              %td= item.author
-              %td= item.manufacturer
-              %td= item.product_group
-              %td= item.asin
-              %td= image_tag item.image_url
-
+              %td= image_tag item.image_url, class: 'img-thumbnail'
+              %td
+                %h4
+                  = link_to item.title, new_post_url(asin: item.asin)
+                  %small= "[#{item.item_binding}]"
+                = item.author
+                %br
+                = item.manufacturer
+                %small= "(#{item.release_date})"
+ 
         = paginate @items
       - else
         検索結果が見つかりません

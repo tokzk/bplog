@@ -21,7 +21,6 @@ gem 'kaminari'
 # Model
 gem 'minimum-omniauth-scaffold'
 gem 'amazon-ecs'
-gem 'active_attr'
 
 gem 'retriable'
 

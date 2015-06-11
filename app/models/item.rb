@@ -1,54 +1,74 @@
 class Item
-  include ActiveAttr::Model
-
-  attribute :asin
-  attribute :title
-  attribute :author
-  attribute :manufacturer
-  attribute :product_group
-  attribute :url
-  attribute :isbn
-  attribute :image_url
-  attribute :small_image_url
-  attribute :medium_image_url
-  attribute :large_image_url
-
-  def self.find(asin)
-    Retriable.retriable on: Timeout::Error, tries: 5, base_interval: 1 do
-      res = Amazon::Ecs.item_lookup(asin, { response_group: "Medium",
-                                            country: 'jp' })
-      item = build(res.first_item)
-    end
-  end
-  
-  def self.search(search_term, page = 1)
-    return [[], 0] if search_term.blank?
-    Retriable.retriable tries: 2, base_interval: 0.5 do
-      res  = Amazon::Ecs.item_search(search_term, { response_group: 'Medium',
-                                                    search_index: 'Books',
-                                                    item_page: page,
-                                                    sort: 'salesrank',
-                                                    country: 'jp'})
-      items = res.items.map{ |item| build(item) }
-      [items, total_count(res)]
-    end
+  def initialize(item)
+    @item = item
+    @attr = @item.get_element('ItemAttributes')
   end
 
-  def self.build(item)
-    item_attributes = item.get_element('ItemAttributes')
-    Item.new(
-      asin:             item.get('ASIN'),
-      title:            item_attributes.get('Title'),
-      author:           item_attributes.get_array("Author").join(", "),
-      manufacturer:     item_attributes.get('Manufacturer'),
-      product_group:    item_attributes.get('ProductGroup'),
-      url:              item.get('DetailPageURL'),
-      isbn:             item_attributes.get('ISBN'),
-      image_url:        item.get('LargeImage/URL'),
-      small_image_url:  item.get_hash('SmallImage/URL'),
-      medium_image_url: item.get_hash('MediumImage/URL'),
-      large_image_url:  item.get_hash('LargeImage/URL')
-    )
+  def asin
+    @item.get('ASIN')    
+  end
+
+  def title
+    @attr.get('Title')
+  end
+
+  def author
+    @attr.get_array("Author").join(", ")
+  end
+
+  def manufacturer
+    @attr.get('Manufacturer')
+  end
+
+  def product_group
+    @attr.get('ProductGroup')
+  end
+
+  def item_binding
+    @attr.get('Binding')
+  end
+
+  def url
+    @attr.get('DetailPageURL')
+  end
+
+  def isbn
+    @attr.get('ISBN')
+  end
+
+  def image_url
+    @item.get('MediumImage/URL')
+  end
+
+  def release_date
+    @attr.get('ReleaseDate') || @attr.get('PublicationDate')
+  end
+
+  class << self
+
+    def find(asin)
+      return if asin.nil?
+      Retriable.retriable tries: 5, base_interval: 1 do
+        res = Amazon::Ecs.item_lookup(asin, { response_group: "Medium",
+                                              country: 'jp' })
+        item = self.new(res.first_item)
+        puts item
+        item
+      end
+    end
+    
+    def search(search_term, page = 1)
+      return [[], 0] if search_term.blank?
+      Retriable.retriable tries: 5, base_interval: 1 do
+        res  = Amazon::Ecs.item_search(search_term, { response_group: 'Medium',
+                                                      search_index: 'Books',
+                                                      item_page: page,
+                                                      sort: 'salesrank',
+                                                      country: 'jp'})
+        items = res.items.map{ |item| self.new(item) }
+        [items, total_count(res)]
+      end
+    end
   end
 
   private

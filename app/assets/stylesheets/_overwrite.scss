@@ -1,17 +1,16 @@
-body {
-  background: #708090 none repeat scroll 0% 0%;
+// 要素の区切りはアンダーライン _ にする
+// SMACSS + BEM
+html, body {
+  background: #efefef none repeat scroll 0% 0%;
+  height: 100%;
 }
 .container {
   width: 750px;
 }
-.body {
-  min-height: 500px;
-  background: #efefef none repeat scroll 0% 0%;
-}
-header.navbar-default .navbar-nav > li > a {
-  color: #fff;
-}
+
 header {
+  background: #708090 none repeat scroll 0% 0%;
+
   &.navbar {
     background: #708090 none repeat scroll 0% 0%;
     margin-bottom: 0;
@@ -26,8 +25,42 @@ header {
     top: -7px;
   }
   
+  &.navbar-default .navbar-nav > li > a {
+    color: #fff;
+  }
 }
+#wrap {
+  min-height: 100%;
+}
+
+main {
+  &.top {
+    margin-top: 0;
+  }
+  
+  min-height: 500px;
+  background: #efefef none repeat scroll 0% 0%;
+
+  overflow:auto;
+  padding-bottom:150px;
+}
+
+.jumbotron {
+  background: #fff none repeat scroll 0% 0%;
+  margin: 0;
+}
+
+.top_info {
+  padding-bottom: 40px;
+}
+
 .footer {
+  position: relative;
+  margin-top: -150px; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+  padding-top:20px;
+  
   color: #fff;
   background: #708090 none repeat scroll 0% 0%;
   .footer_copyright {

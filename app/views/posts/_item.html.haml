@@ -4,8 +4,8 @@
   .col-md-10.section-box
     %h4
       = link_to item.title, item.url, target: :_blank
-      %small= "[#{item.product_group}]"
+      %small= "[#{item.item_binding}]"
     = item.author
-    /
+    %br
     = item.manufacturer
-    
+    %small= "(#{item.release_date})"    
