@@ -4,6 +4,6 @@ class TopController < ApplicationController
 
   # トップ
   def index
-    render 'top' unless signed_in?
+    render 'my/index' if signed_in?
   end
 end

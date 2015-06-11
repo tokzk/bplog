@@ -1,27 +1,23 @@
-
-.section.profile
+.jumbotron
   .container
-    .row
-      .col-md-2
-        %img.img-circle.img-responsive{:src => "http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png"}/
-      .col-md-10
-        %h3.text-left John Doe
-        %p.text-left Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-
-.section.books
+    .l-upper
+      %h1.logo
+        bplog
+      %p.tagline= '...'
+      %span.description
+        一冊の
+      .link-more= link_to 'もっとくわしく', '#'
+    .l-lower
+      %p.text-center.login
+        = link_to '/auth/twitter', class: "btn btn-primary btn-lg", role: "button" do
+          = icon('twitter', 'Twitterでログインする')
+.top_info
   .container
-    .row
-      .col-md-3
-        %img.img-responsive{:src => "http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"}/
-      .col-md-9
-        %h1 A title
-        %h3 A subtitle
-        %p
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-          ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-          dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-          nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-          Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-          enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-          felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-          elementum semper nisi.
+    %section.concept
+      %h2
+        すきなモノの話をしよう
+    %section.explain
+      ともだちや好きな人のおすすめを記録することができます。
+      だれがおすすめしていたかも記録できるので、会ったときにその話をしよう。
+      
+      

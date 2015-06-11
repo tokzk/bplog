@@ -12,12 +12,10 @@
     - if signed_in?
       %header
         = render 'layouts/navigation'
-        #wrap
-          %main{role: "main"}
-            = render 'layouts/messages'
-            = yield
+      %main#main{role: "main"}
+        = render 'layouts/messages'
+        = yield
     - else
-      #wrap
-        %main.top{role: "main"}
-          = render 'top/index'
+      %main#top{role: "main"}
+        = yield
     = render "layouts/footer"

@@ -1,70 +1,73 @@
 // 要素の区切りはアンダーライン _ にする
 // SMACSS + BEM
-html, body {
-  background: #efefef none repeat scroll 0% 0%;
-  height: 100%;
-}
-.container {
-  width: 750px;
-}
 
-header {
-  background: #708090 none repeat scroll 0% 0%;
 
-  &.navbar {
-    background: #708090 none repeat scroll 0% 0%;
-    margin-bottom: 0;
-  }
-
-  .navbar-brand {
-    font-size: 28px;
-    height: 50px;
-    line-height: 26px;
-    color: #fff !important;
-    position: relative;
-    top: -7px;
-  }
-  
-  &.navbar-default .navbar-nav > li > a {
-    color: #fff;
-  }
-}
-#wrap {
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
   min-height: 100%;
 }
-
-main {
-  &.top {
-    margin-top: 0;
-  }
-  
-  min-height: 500px;
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 150px;
   background: #efefef none repeat scroll 0% 0%;
-
-  overflow:auto;
-  padding-bottom:150px;
 }
-
-.jumbotron {
-  background: #fff none repeat scroll 0% 0%;
-  margin: 0;
-}
-
-.top_info {
-  padding-bottom: 40px;
-}
-
 .footer {
-  position: relative;
-  margin-top: -150px; /* negative value of footer height */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
   height: 150px;
-  clear:both;
-  padding-top:20px;
-  
+
   color: #fff;
   background: #708090 none repeat scroll 0% 0%;
   .footer_copyright {
     margin-top: 20px;
     line-height: 1.5;
   }
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: auto;
+  max-width: 750px;
+  padding: 0 15px;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+main {
+  &#main {
+    padding-top: 51px;
+  }
+  margin: 0;
+}
+
+.jumbotron {
+  background: #fff none repeat scroll 0% 0%;
+  margin: 0;
+  .container {
+    max-width: 750px;
+  }
+}
+
+.navbar-brand-centered {
+  padding-top: 10px;
+  position: absolute;
+  left: 50%;
+  display: block;
+  width: 160px;
+  text-align: center;
+  background-color: transparent;
+}
+.navbar>.container .navbar-brand-centered,
+.navbar>.container-fluid .navbar-brand-centered {
+  margin-left: -80px;
 }
